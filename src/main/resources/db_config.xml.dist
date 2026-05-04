@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseConfig>
+    <host>******</host>
+    <port>******</port>
+    <dbName>tu_base_de_datos</dbName>
+    <user>usuario</user>
+    <password>contraseña</password>
+</databaseConfig>
