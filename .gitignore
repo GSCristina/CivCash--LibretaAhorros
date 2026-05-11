@@ -38,3 +38,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Configuración de la BD
+db_config.xml

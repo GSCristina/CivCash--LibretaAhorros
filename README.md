@@ -33,15 +33,15 @@ Importa el script SQL que se encuentra en la carpeta `/docs/database_schema.sql`
 
 ### 2. Configuración de la Conexión
 Por motivos de seguridad, los archivos que contienen credenciales no están incluidos en el repositorio. Sigue estos pasos:
-1. Localiza el archivo `src/main/resources/db_config.xml.dist`.
+1. Localiza el archivo `db_config.xml.dist`.
 2. Haz una copia del archivo y cámbiale el nombre a `db_config.xml`.
 3. Abre `db_config.xml` y edita los valores correspondientes a tu entorno (host, puerto, nombre de la base de datos, usuario y contraseña).
 ```xml
 <!-- Ejemplo de configuración en db_config.xml -->
 <databaseConfig>
     <host>localhost</host>
-    <port>3306</port>
-    <dbName>savelog_db</dbName>
+    <port>3307</port>
+    <dbName>libreta_ahorros</dbName>
     <user>root</user>
-    <password>tu_contraseña_aqui</password>
+    <password>CONTRASEÑA</password>
 </databaseConfig>

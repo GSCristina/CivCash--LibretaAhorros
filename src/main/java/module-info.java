@@ -4,6 +4,8 @@ module org.libretaahorros.libretaahorros {
     requires java.sql;
     requires jakarta.xml.bind;
 
+    opens org.libretaahorros.libretaahorros.dataAccess to jakarta.xml.bind;
+    opens org.libretaahorros.libretaahorros to javafx.fxml;
     opens org.libretaahorros.libretaahorros.model to jakarta.xml.bind, javafx.base;
     opens org.libretaahorros.libretaahorros.controlador to javafx.fxml;
 
