@@ -3,6 +3,8 @@ package org.libretaahorros.libretaahorros.controlador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
@@ -42,5 +44,20 @@ public class MainController {
             System.err.println("No se pudo abrir la ventana de movimientos: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    @FXML
+    private void handleEliminarMovimiento() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar eliminación");
+        alert.setHeaderText("¿Deseas borrar el registro?");
+        alert.setContentText("¿Estás seguro de que quieres eliminar este movimiento? Esta acción no se podra deshacer.");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                System.out.println("El usuario ha confirmado: Eliminando movimiento...");
+            } else {
+                System.out.println("Eliminación cancelada por el usuario.");
+            }
+        });
     }
 }
