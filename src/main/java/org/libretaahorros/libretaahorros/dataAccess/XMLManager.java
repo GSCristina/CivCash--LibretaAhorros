@@ -7,7 +7,7 @@ import java.io.File;
 public class XMLManager {
     public static ConnectionProperties loadConfig() {
         try {
-            File file = new File("src/main/resources/db_config.xml");
+            File file = new File("db_config.xml");
             JAXBContext context = JAXBContext.newInstance(ConnectionProperties.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
 

@@ -1,4 +1,4 @@
 package org.libretaahorros.libretaahorros.model;
 
-public class Categoria {
+public class UsuarioLibreta {
 }

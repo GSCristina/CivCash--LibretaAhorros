@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseConfig>
+    <host>localhost</host>
+    <port>3307</port>
+    <dbName>libreta_ahorros</dbName>
+    <user>root</user>
+    <password>CONTRASEÑA</password>
+</databaseConfig>

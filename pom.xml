@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -27,13 +26,11 @@
             <version>21.0.6</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.1.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -45,7 +42,6 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>4.0.5</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
