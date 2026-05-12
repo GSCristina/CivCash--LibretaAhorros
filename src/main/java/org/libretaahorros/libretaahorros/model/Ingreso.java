@@ -7,16 +7,16 @@ public class Ingreso extends Movimiento{
 
     public Ingreso() { super(); }
 
-    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int libreta, String fuente) {
+    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int libreta, String procedencia) {
         super(idMovimiento, concepto, cantidad, fecha, categoria, libreta);
-        this.procedencia = fuente;
+        this.procedencia = procedencia;
     }
 
-    public String getFuente() {
+    public String getProcedencia() {
         return procedencia;
     }
 
-    public void setFuente(String fuente) {
-        this.procedencia = fuente;
+    public void setProcedencia(String procedencia) {
+        this.procedencia = procedencia;
     }
 }
