@@ -47,7 +47,12 @@ public class LibretaDAO {
             con.commit();
             return true;
         } catch (SQLException e) {
-            if (con != null) try { con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+            if (con != null)
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             e.printStackTrace();
             return false;
         }

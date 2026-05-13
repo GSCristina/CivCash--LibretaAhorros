@@ -14,18 +14,10 @@ import org.libretaahorros.libretaahorros.model.Usuario;
 import java.io.IOException;
 
 public class LoginController {
-
-    @FXML
-    private TextField txtEmail;
-
-    @FXML
-    private PasswordField txtPassword;
-
-    @FXML
-    private Button btnEntrar;
-
-    @FXML
-    private Button btnRegistrar;
+    @FXML private TextField txtEmail;
+    @FXML private PasswordField txtPassword;
+    @FXML private Button btnEntrar;
+    @FXML private Button btnRegistrar;
 
     @FXML
     public void onLoginClick() {
@@ -35,8 +27,10 @@ public class LoginController {
         Usuario user = UsuarioDAO.validarLogin(email, pass);
 
         if (user != null) {
-            System.out.println("Login exitoso. Cargando MainView...");
-            cargarVentanaPrincipal();
+            System.out.println("Login exitoso. Cargando Libretas...");
+            Sesion.iniciarSesion(user);
+            cargarSelectorLibretas();
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error de acceso");
@@ -45,19 +39,19 @@ public class LoginController {
             alert.showAndWait();
         }
     }
-    private void cargarVentanaPrincipal() {
+    private void cargarSelectorLibretas() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/main_view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/selectorLibreta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnEntrar.getScene().getWindow();
 
             stage.setScene(scene);
-            stage.setTitle("Libreta de Ahorros - Pantalla Principal");
+            stage.setTitle("Mis Libretas");
             stage.setResizable(true);
             stage.show();
 
         } catch (IOException e) {
-            System.err.println("Error al cargar la vista principal: " + e.getMessage());
+            System.err.println("Error al cargar el selector: " + e.getMessage());
             e.printStackTrace();
         }
     }
