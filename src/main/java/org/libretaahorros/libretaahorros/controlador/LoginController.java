@@ -59,5 +59,26 @@ public class LoginController {
     @FXML
     public void onRegisterClick() {
         System.out.println("Navegando al registro...");
+        String email = txtEmail.getText();
+        String pass = txtPassword.getText();
+        if (email == null || email.trim().isEmpty() || pass == null || pass.trim().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, rellena el email y la contraseña para registrarte.");
+            return;
+        }
+        Usuario nuevoUsuario = new Usuario(0, email, pass);
+        Usuario usuarioGuardado = UsuarioDAO.addUsuario(nuevoUsuario);
+        if (usuarioGuardado != null) {
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Registro Exitoso", "¡Usuario creado correctamente!\nAhora puedes darle a 'Entrar'.");
+            txtPassword.clear();
+        } else {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Registro", "El email ingresado ya está registrado en el sistema.");
+        }
+    }
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
