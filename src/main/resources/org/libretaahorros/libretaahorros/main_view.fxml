@@ -29,7 +29,7 @@
         </MenuBar>
     </top>
     <center>
-        <TableView fx:id="tablaMovimientos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tablaMovimientos" prefHeight="200.0" prefWidth="682.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="colFecha" prefWidth="100.0" text="Fecha" />
                 <TableColumn fx:id="colConcepto" prefWidth="250.0" text="Concepto" />
@@ -45,12 +45,17 @@
     <right>
         <VBox spacing="15.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" text="Nuevo" />
+                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo" />
                 <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Editar" />
                 <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEliminarMovimiento" text="Eliminar" />
+            <Label text="Saldo Actual:" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </Label>
                 <Label fx:id="lblSaldo" text="0.00 €">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Segoe UI" size="24.0" />
                </font></Label>
             </children>
             <padding>

@@ -20,8 +20,8 @@ public class SelectorLibretasController {
 
     @FXML
     public void initialize() {
-        if (Sesion.getUsuario() != null) {
-            lblUsuario.setText("Bienvenido, " + Sesion.getUsuario().getEmail());
+        if (SesionController.getUsuario() != null) {
+            lblUsuario.setText("Bienvenido, " + SesionController.getUsuario().getEmail());
         }
         cargarLibretas();
     }
@@ -29,7 +29,7 @@ public class SelectorLibretasController {
     private void cargarLibretas() {
         fpLibretas.getChildren().clear();
 
-        int idUser = Sesion.getUsuario().getIdUsuario();
+        int idUser = SesionController.getUsuario().getIdUsuario();
         List<Libreta> listaLibretas = LibretaDAO.findAllByUsuario(idUser);
 
         for (Libreta lib : listaLibretas) {
@@ -37,7 +37,7 @@ public class SelectorLibretasController {
             btnLibreta.setPrefSize(120, 80);
 
             btnLibreta.setOnAction(event -> {
-                Sesion.setLibreta(lib);
+                SesionController.setLibreta(lib);
                 cargarVentanaPrincipal();
             });
             fpLibretas.getChildren().add(btnLibreta);
@@ -53,7 +53,7 @@ public class SelectorLibretasController {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) fpLibretas.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Libreta de Ahorros - " + Sesion.getLibreta().getNombre());
+            stage.setTitle("Libreta de Ahorros - " + SesionController.getLibreta().getNombre());
             stage.setResizable(true);
             stage.show();
 
@@ -64,13 +64,27 @@ public class SelectorLibretasController {
     }
     @FXML
     public void handleNuevaLibreta() {
-        System.out.println("Clic en Nueva Libreta. ¡Próximamente!");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/nueva_libreta_view.fxml"));
 
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Crear Nueva Libreta");
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();
+            cargarLibretas();
+
+        } catch (IOException e) {
+            System.err.println("No se pudo abrir la ventana de nueva libreta: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     @FXML
     public void handleCerrarSesion() {
         System.out.println("Cerrando sesión...");
-        Sesion.cerrarSesion();
+        SesionController.cerrarSesion();
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/login_view.fxml"));

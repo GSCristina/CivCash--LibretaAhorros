@@ -3,7 +3,7 @@ package org.libretaahorros.libretaahorros.controlador;
 import org.libretaahorros.libretaahorros.model.Libreta;
 import org.libretaahorros.libretaahorros.model.Usuario;
 
-public class Sesion {
+public class SesionController {
     private static Usuario usuarioLogueado;
     private static Libreta libretaSeleccionada;
 
