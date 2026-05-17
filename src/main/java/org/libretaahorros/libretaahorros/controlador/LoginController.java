@@ -28,7 +28,7 @@ public class LoginController {
 
         if (user != null) {
             System.out.println("Login exitoso. Cargando Libretas...");
-            Sesion.iniciarSesion(user);
+            SesionController.iniciarSesion(user);
             cargarSelectorLibretas();
 
         } else {
