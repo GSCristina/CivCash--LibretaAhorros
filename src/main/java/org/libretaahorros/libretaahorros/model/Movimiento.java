@@ -9,16 +9,18 @@ public abstract class Movimiento {
     protected LocalDate fecha;
     protected String categoria;
     protected int idLibreta;
+    private String responsable;
 
     public Movimiento() {}
 
-    public Movimiento(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta) {
+    public Movimiento(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta, String responsable) {
         this.idMovimiento = idMovimiento;
         this.concepto = concepto;
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.categoria = categoria;
         this.idLibreta = idLibreta;
+        this.responsable = responsable;
     }
 
     public int getIdMovimiento() {
@@ -68,4 +70,7 @@ public abstract class Movimiento {
     public void setIdLibreta(int idLibreta) {
         this.idLibreta = idLibreta;
     }
+    public abstract String getTipo();
+    public String getResponsable() { return responsable; }
+    public void setResponsable(String responsable) { this.responsable = responsable; }
 }
