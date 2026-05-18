@@ -68,4 +68,8 @@ public class Libreta {
     public void addUsuario(Usuario usuario) {
         this.usuarios.add(usuario);
     }
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 }

@@ -7,8 +7,8 @@ public class Ingreso extends Movimiento{
 
     public Ingreso() { super(); }
 
-    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int libreta, String procedencia) {
-        super(idMovimiento, concepto, cantidad, fecha, categoria, libreta);
+    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta, String responsable, String procedencia) {
+        super(idMovimiento, concepto, cantidad, fecha, categoria, idLibreta, responsable);
         this.procedencia = procedencia;
     }
 
@@ -18,5 +18,9 @@ public class Ingreso extends Movimiento{
 
     public void setProcedencia(String procedencia) {
         this.procedencia = procedencia;
+    }
+    @Override
+    public String getTipo() {
+        return "Ingreso";
     }
 }

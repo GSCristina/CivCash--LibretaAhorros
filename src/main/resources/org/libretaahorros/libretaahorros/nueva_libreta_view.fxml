@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.NuevaLibretaController">
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.NuevaLibretaController">
     <children>
         <Label text="Crear Nueva Libreta">
             <font>
@@ -20,6 +20,8 @@
             <children>
                 <Label text="Nombre de la libreta:" />
                 <TextField fx:id="txtNombre" promptText="Ej: Ahorros Coche, Gastos Casa..." />
+            <Label text="Compartir con (Email de amigo) - Opcional:" />
+            <TextField fx:id="txtEmailAmigo" promptText="Ej: amigo@correo.com" />
             </children>
             <VBox.margin>
                 <Insets left="20.0" right="20.0" />

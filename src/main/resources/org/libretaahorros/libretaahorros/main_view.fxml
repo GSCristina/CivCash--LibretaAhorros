@@ -11,18 +11,21 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
-                        <MenuItem mnemonicParsing="false" text="Salir" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleCerrarSesion" text="Cerrar Sesión" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSalirAlSelector" text="Salir" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edición">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Borrar Todo" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEditarLibretaActual" text="Editar Nombre Libreta" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEliminarLibretaActual" text="Eliminar Libreta" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleBorrarTodoMovimientos" text="Borrar Todo" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ayuda">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Acerca de" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleAcercaDe" text="Acerca de" />
                     </items>
                 </Menu>
             </menus>
@@ -36,6 +39,7 @@
                 <TableColumn fx:id="colCategoria" prefWidth="120.0" text="Categoría" />
                 <TableColumn fx:id="colCantidad" prefWidth="100.0" text="Cantidad" />
                 <TableColumn fx:id="colTipo" prefWidth="100.0" text="Tipo" />
+                <TableColumn fx:id="colResponsable" prefWidth="100.0" text="Responsable" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -46,17 +50,17 @@
         <VBox spacing="15.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo" />
-                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Editar" />
+                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditarMovimiento" text="Editar" />
                 <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEliminarMovimiento" text="Eliminar" />
-            <Label text="Saldo Actual:" textAlignment="CENTER">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </Label>
+                <Label text="Saldo Actual:" textAlignment="CENTER">
+                    <font>
+                        <Font name="Segoe UI" size="14.0" />
+                    </font>
+                </Label>
                 <Label fx:id="lblSaldo" text="0.00 €">
-               <font>
-                  <Font name="Segoe UI" size="24.0" />
-               </font></Label>
+                    <font>
+                        <Font name="Segoe UI" size="24.0" />
+                    </font></Label>
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
