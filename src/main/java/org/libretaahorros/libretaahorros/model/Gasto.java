@@ -8,7 +8,8 @@ public class Gasto extends Movimiento{
     public Gasto() {
         super();
     }
-    public Gasto(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta, String responsable, String metodoPago) {
+
+    public Gasto(int idMovimiento, String concepto, double cantidad, LocalDate fecha, Categoria categoria, int idLibreta, String responsable, String metodoPago) {
         super(idMovimiento, concepto, cantidad, fecha, categoria, idLibreta, responsable);
         this.metodoPago = metodoPago;
     }

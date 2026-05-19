@@ -7,7 +7,7 @@ public class Ingreso extends Movimiento{
 
     public Ingreso() { super(); }
 
-    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta, String responsable, String procedencia) {
+    public Ingreso(int idMovimiento, String concepto, double cantidad, LocalDate fecha, Categoria categoria, int idLibreta, String responsable, String procedencia) {
         super(idMovimiento, concepto, cantidad, fecha, categoria, idLibreta, responsable);
         this.procedencia = procedencia;
     }

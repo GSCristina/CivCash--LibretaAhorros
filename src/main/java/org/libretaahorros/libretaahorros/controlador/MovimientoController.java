@@ -72,7 +72,7 @@ public class MovimientoController {
             Optional<String> result = dialog.showAndWait();
             String procedencia = result.orElse("Otros");
 
-            nuevoMovimiento = new Ingreso(0, concepto.trim(), cantidad, fecha, categoria.name(), idLibreta, responsable.trim(), procedencia);
+            nuevoMovimiento = new Ingreso(0, concepto.trim(), cantidad, fecha, categoria, idLibreta, responsable.trim(), procedencia);
         } else {
             TextInputDialog dialog = new TextInputDialog("Tarjeta");
             dialog.setTitle("Método de Pago");
@@ -81,15 +81,15 @@ public class MovimientoController {
             Optional<String> result = dialog.showAndWait();
             String metodoPago = result.orElse("Tarjeta");
 
-            nuevoMovimiento = new Gasto(0, concepto.trim(), cantidad, fecha, categoria.name(), idLibreta, responsable.trim(), metodoPago);
+            nuevoMovimiento = new Gasto(0, concepto.trim(), cantidad, fecha, categoria, idLibreta, responsable.trim(), metodoPago);
         }
 
         boolean exito;
         if (movimientoAEditar != null) {
             nuevoMovimiento.setIdMovimiento(movimientoAEditar.getIdMovimiento());
-            exito = MovimientoDAO.updateMovimiento(nuevoMovimiento);
+            exito = MovimientoDAO.getInstance().update(nuevoMovimiento);
         } else {
-            exito = MovimientoDAO.addMovimiento(nuevoMovimiento);
+            exito = MovimientoDAO.getInstance().add(nuevoMovimiento);
         }
 
         if (exito) {
@@ -103,7 +103,7 @@ public class MovimientoController {
         txtConcepto.setText(m.getConcepto());
         txtCantidad.setText(String.valueOf(m.getCantidad()));
         dpFecha.setValue(m.getFecha());
-        cbCategoria.setValue(Categoria.valueOf(m.getCategoria().toUpperCase()));
+        cbCategoria.setValue(m.getCategoria());
         txtResponsable.setText(m.getResponsable());
 
         if (m instanceof Ingreso) {

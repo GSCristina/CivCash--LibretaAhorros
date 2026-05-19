@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import org.libretaahorros.libretaahorros.DAO.LibretaDAO;
 import org.libretaahorros.libretaahorros.model.Libreta;
+import org.libretaahorros.libretaahorros.model.UsuarioLibreta;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,16 +27,24 @@ public class SelectorLibretasController {
         cargarLibretas();
     }
 
+    /**
+     * Metodo encargado de cargar las libretas de usuarios, cambia el formato para aquellas compartidas entre otros
+     * y aplica diferentes roles, usa lmbda para gestionar la transicion en el controlador de sesion.
+     */
     private void cargarLibretas() {
         fpLibretas.getChildren().clear();
 
         int idUser = SesionController.getUsuario().getIdUsuario();
-        List<Libreta> listaLibretas = LibretaDAO.findAllByUsuario(idUser);
+        List<UsuarioLibreta> listaAsociaciones = LibretaDAO.findAllByUsuarioLazy(idUser);
 
-        for (Libreta lib : listaLibretas) {
+        for (UsuarioLibreta asociacion : listaAsociaciones) {
+            Libreta lib = asociacion.getLibreta();
             Button btnLibreta = new Button(lib.getNombre() + "\nSaldo: " + lib.getSaldoActual() + "€");
             btnLibreta.setPrefSize(120, 80);
 
+            if (asociacion.getRol().equals("Invitado")) {
+                btnLibreta.setStyle("-fx-border-color: #3caea3; -fx-border-width: 2px;");
+            }
             btnLibreta.setOnAction(event -> {
                 SesionController.setLibreta(lib);
                 cargarVentanaPrincipal();

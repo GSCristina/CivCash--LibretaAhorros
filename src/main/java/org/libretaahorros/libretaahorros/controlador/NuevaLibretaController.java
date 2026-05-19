@@ -29,7 +29,7 @@ public class NuevaLibretaController {
         nuevaLibreta.setSaldoActual(0.0);
 
         int idUser = SesionController.getUsuario().getIdUsuario();
-        boolean guardadoExito = LibretaDAO.addLibreta(nuevaLibreta, idUser, emailAmigo);
+        boolean guardadoExito = LibretaDAO.getInstance().addLibretaCompartida(nuevaLibreta, idUser, emailAmigo);
 
         if (guardadoExito) {
             cerrarVentana();

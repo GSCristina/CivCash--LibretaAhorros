@@ -18,26 +18,21 @@ public class LoginController {
     @FXML private TextField txtEmail;
     @FXML private PasswordField txtPassword;
     @FXML private Button btnEntrar;
-    @FXML private Button btnRegistrar;
 
     @FXML
     public void onLoginClick() {
         String email = txtEmail.getText();
-        String pass = txtPassword.getText();
+        String password = txtPassword.getText();
 
-        Usuario user = UsuarioDAO.validarLogin(email, pass);
+        Usuario usuario = UsuarioDAO.validarLogin(email, password);
 
-        if (user != null) {
+        if (usuario != null) {
             System.out.println("Login exitoso. Cargando Libretas...");
-            SesionController.iniciarSesion(user);
+            SesionController.iniciarSesion(usuario);
             cargarSelectorLibretas();
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de acceso");
-            alert.setHeaderText(null);
-            alert.setContentText("Email o contraseña incorrectos.");
-            alert.showAndWait();
+            Util.mostrarAlerta(Alert.AlertType.ERROR, "Error de acceso", "Email o contraseña incorrectos.");
         }
     }
     private void cargarSelectorLibretas() {
@@ -45,7 +40,6 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/selectorLibreta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnEntrar.getScene().getWindow();
-
             stage.setScene(scene);
             stage.setTitle("Mis Libretas");
             stage.setResizable(true);
@@ -59,7 +53,6 @@ public class LoginController {
 
     @FXML
     public void onRegisterClick() {
-        System.out.println("Navegando al registro...");
         String email = txtEmail.getText();
         String pass = txtPassword.getText();
         if (email == null || email.trim().isEmpty() || pass == null || pass.trim().isEmpty()) {

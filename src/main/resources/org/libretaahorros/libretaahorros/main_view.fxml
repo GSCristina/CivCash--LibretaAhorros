@@ -2,12 +2,14 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.MainController">
     <top>
-        <MenuBar BorderPane.alignment="CENTER">
+        <MenuBar style="-fx-background-color: #b0e0e2;" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                     <items>
@@ -32,7 +34,7 @@
         </MenuBar>
     </top>
     <center>
-        <TableView fx:id="tablaMovimientos" prefHeight="200.0" prefWidth="682.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tablaMovimientos" prefHeight="200.0" prefWidth="682.0" style="-fx-background-color: #e8eeee;" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="colFecha" prefWidth="100.0" text="Fecha" />
                 <TableColumn fx:id="colConcepto" prefWidth="250.0" text="Concepto" />
@@ -47,14 +49,44 @@
         </TableView>
     </center>
     <right>
-        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+        <VBox spacing="15.0" style="-fx-background-color: #b0e0e2;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo" />
-                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditarMovimiento" text="Editar" />
-                <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEliminarMovimiento" text="Eliminar" />
+                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.3" radius="3.5650000000000004" width="6.96">
+                     <color>
+                        <Color red="0.5894736647605896" green="0.532709538936615" blue="0.532709538936615" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditarMovimiento" text="Editar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="4.62" radius="2.395" width="6.96">
+                     <color>
+                        <Color red="0.7684210538864136" green="0.6944249272346497" blue="0.6944249272346497" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+                <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEliminarMovimiento" style="-fx-background-color: #f24a50;" text="Eliminar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="4.62" radius="3.5650000000000004" width="11.64">
+                     <color>
+                        <Color red="0.5157894492149353" green="0.4966861605644226" blue="0.4966861605644226" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
                 <Label text="Saldo Actual:" textAlignment="CENTER">
                     <font>
-                        <Font name="Segoe UI" size="14.0" />
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label fx:id="lblSaldo" text="0.00 €">
