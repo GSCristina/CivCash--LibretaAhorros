@@ -47,7 +47,7 @@ public class MainController {
     private void cargarMovimientos() {
         Libreta libretaActual = SesionController.getLibreta();
         if (libretaActual != null) {
-            List<Movimiento> listaBD = MovimientoDAO.findAllByLibreta(libretaActual.getIdLibreta());
+            List<Movimiento> listaBD = MovimientoDAO.findAllByLibretaEagle(libretaActual.getIdLibreta());
 
             obsMovimientos = FXCollections.observableArrayList(listaBD);
             tablaMovimientos.setItems(obsMovimientos);
@@ -85,6 +85,8 @@ public class MainController {
         alert.setTitle("Confirmar vaciado");
         alert.setHeaderText("¿Borrar todos los movimientos?");
         alert.setContentText("Se eliminará todo el historial de esta libreta, reiniciando su saldo.");
+
+        aplicarEstiloBoton(alert);
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
@@ -140,9 +142,11 @@ public class MainController {
         alert.setHeaderText("¿Seguro que deseas eliminar '" + libretaActual.getNombre() + "'?");
         alert.setContentText("Esta acción borrará la libreta y todos sus movimientos de forma permanente.");
 
+        aplicarEstiloBoton(alert);
+
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                boolean exito = LibretaDAO.deleteLibreta(libretaActual.getIdLibreta());
+                boolean exito = LibretaDAO.getInstance().delete(libretaActual.getIdLibreta());
                 if (exito) {
                     handleSalirAlSelector();
                 }
@@ -211,9 +215,11 @@ public class MainController {
         alert.setHeaderText("¿Deseas borrar el registro?");
         alert.setContentText("¿Estás seguro de que quieres eliminar este movimiento? Esta acción no se podrá deshacer.");
 
+        aplicarEstiloBoton(alert);
+
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                boolean exito = MovimientoDAO.deleteMovimiento(seleccionado.getIdMovimiento());
+                boolean exito = MovimientoDAO.getInstance().delete(seleccionado.getIdMovimiento());
                 if (exito) {
                     cargarMovimientos();
                 } else {
@@ -234,5 +240,20 @@ public class MainController {
                 + "múltiples libretas y cálculo de saldos optimizado mediante streams.";
 
         Util.mostrarAlerta(Alert.AlertType.INFORMATION, "Acerca de - Libreta de Ahorros", mensaje);
+    }
+
+    private void aplicarEstiloBoton(Alert alert) {
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/org/libretaahorros/libretaahorros/Tema.css").toExternalForm()
+        );
+
+        Button btnAceptar = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+        Button btnCancelar = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
+
+        if (btnAceptar != null && btnCancelar != null) {
+            btnAceptar.setDefaultButton(false);
+            btnCancelar.setDefaultButton(true);
+            btnCancelar.requestFocus();
+        }
     }
 }

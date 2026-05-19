@@ -7,13 +7,13 @@ public abstract class Movimiento {
     protected String concepto;
     protected double cantidad;
     protected LocalDate fecha;
-    protected String categoria;
+    protected Categoria categoria;
     protected int idLibreta;
     private String responsable;
 
     public Movimiento() {}
 
-    public Movimiento(int idMovimiento, String concepto, double cantidad, LocalDate fecha, String categoria, int idLibreta, String responsable) {
+    public Movimiento(int idMovimiento, String concepto, double cantidad, LocalDate fecha, Categoria categoria, int idLibreta, String responsable) {
         this.idMovimiento = idMovimiento;
         this.concepto = concepto;
         this.cantidad = cantidad;
@@ -55,11 +55,11 @@ public abstract class Movimiento {
         this.fecha = fecha;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

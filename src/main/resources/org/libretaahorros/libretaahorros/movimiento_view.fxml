@@ -2,15 +2,20 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.MovimientoController">
+<VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #e8eeee;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.MovimientoController">
     <children>
         <Label text="Gestión de Movimiento">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
         </Label>
         <GridPane hgap="10.0" vgap="15.0">
             <columnConstraints>
@@ -42,11 +47,25 @@
         </GridPane>
         <HBox alignment="CENTER_RIGHT" spacing="10.0">
             <children>
-                <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
+                <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar">
+               <effect>
+                  <DropShadow height="4.62" radius="1.225" width="2.28">
+                     <color>
+                        <Color red="0.6000000238418579" green="0.6000000238418579" blue="0.6000000238418579" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
                 <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleGuardar" style="-fx-background-color: #2ecc71;" text="Guardar" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
-                    </font></Button>
+                    </font>
+               <effect>
+                  <DropShadow height="4.62" radius="2.9800000000000004" width="9.3">
+                     <color>
+                        <Color red="0.5894736647605896" green="0.5894736647605896" blue="0.5894736647605896" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
             </children>
         </HBox>
     </children>

@@ -39,8 +39,11 @@ public class UsuarioDAO {
         }
         return usuario;
     }
+
     /**
-     * Equivalente al findByName del profesor, pero usando el Email (nuestra clave natural).
+     * Metodo que comprueba si un email ya existe en el sistema trayendo sus datos
+     * @param email pasamos el email que queremos buscar dentro de la bbdd
+     * @return un usuario
      */
     public static Usuario findByEmail(String email) {
         Usuario usuario = null;
@@ -61,7 +64,9 @@ public class UsuarioDAO {
     }
 
     /**
-     * Añade un nuevo usuario verificando antes que no exista ese email.
+     * Metod que añade un nuevo usuario verificando antes que no exista ese email dentro de la bbdd.
+     * @param usuario pasamos un objeto usuario provisional recogido por JavaFX desde la interfaz
+     * @return devuelve un usuario
      */
     public static Usuario addUsuario(Usuario usuario) {
         if ((usuario != null) && findByEmail(usuario.getEmail()) == null) {
@@ -69,7 +74,7 @@ public class UsuarioDAO {
                 ps.setString(1, usuario.getEmail());
                 ps.setString(2, usuario.getPassword());
                 ps.executeUpdate();
-                // Una vez insertado, lo buscamos para devolverlo con el ID autogenerado
+
                 usuario = findByEmail(usuario.getEmail());
             } catch (SQLException e) {
                 throw new RuntimeException(e);

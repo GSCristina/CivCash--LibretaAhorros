@@ -5,9 +5,10 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e8eeee;" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.LoginController">  <columnConstraints>
+<GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Tema.css" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.LoginController">  <columnConstraints>
     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="21.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="79.0" prefWidth="100.0" />
   </columnConstraints>
@@ -30,8 +31,28 @@
       <PasswordField fx:id="txtPassword" promptText="Tu contraseña" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="btnEntrar" mnemonicParsing="false" onAction="#onLoginClick" style="-fx-background-color: #86D1D1;" text="Entrar" />
-            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#onRegisterClick" text="Registrarse" />
+            <Button fx:id="btnEntrar" mnemonicParsing="false" onAction="#onLoginClick" style="-fx-background-color: #86D1D1;" text="Entrar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="6.96" radius="3.5650000000000004" width="9.3">
+                     <color>
+                        <Color red="0.49473685026168823" green="0.4910721182823181" blue="0.4910721182823181" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#onRegisterClick" text="Registrarse">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="4.62" radius="2.395" width="6.96">
+                     <color>
+                        <Color red="0.6736842393875122" green="0.6736842393875122" blue="0.6736842393875122" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
          </children>
       </HBox>
       <ImageView fitHeight="171.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">

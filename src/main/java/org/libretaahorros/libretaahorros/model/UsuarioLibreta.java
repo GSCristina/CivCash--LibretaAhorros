@@ -2,15 +2,17 @@ package org.libretaahorros.libretaahorros.model;
 
 public class UsuarioLibreta {
     private int idUsuario;
-    private int idLibreta;
+    private Libreta libreta;
+    private String rol;
 
     public UsuarioLibreta() {
 
     }
 
-    public UsuarioLibreta(int idUsuario, int idLibreta) {
+    public UsuarioLibreta(int idUsuario, Libreta libreta, String rol) {
         this.idUsuario = idUsuario;
-        this.idLibreta = idLibreta;
+        this.libreta = libreta;
+        this.rol = rol;
     }
 
     public int getIdUsuario() {
@@ -21,11 +23,19 @@ public class UsuarioLibreta {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdLibreta() {
-        return idLibreta;
+    public Libreta getLibreta() {
+        return libreta;
     }
 
-    public void setIdLibreta(int idLibreta) {
-        this.idLibreta = idLibreta;
+    public void setLibreta(Libreta libreta) {
+        this.libreta = libreta;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
