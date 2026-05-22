@@ -29,7 +29,7 @@
 
         <HBox alignment="CENTER" spacing="20.0">
             <children>
-                <Button onAction="#handleNuevaLibreta" styleClass="boton-principal" text="+ Nueva Libreta">
+                <Button onAction="#accionNuevaLibreta" styleClass="boton-principal" text="+ Nueva Libreta">
                     <HBox.margin>
                         <Insets bottom="10.0" />
                     </HBox.margin>
@@ -42,7 +42,7 @@
                     </effect>
                 </Button>
 
-                <Button onAction="#handleCerrarSesion" styleClass="boton-cancelar" text="Cerrar Sesión">
+                <Button onAction="#accionCerrarSesion" styleClass="boton-cancelar" text="Cerrar Sesión">
                     <HBox.margin>
                         <Insets bottom="10.0" />
                     </HBox.margin>

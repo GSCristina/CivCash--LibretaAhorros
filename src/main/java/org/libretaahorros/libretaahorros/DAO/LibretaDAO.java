@@ -99,14 +99,14 @@ public class LibretaDAO implements GenericDAO<Libreta> {
     }
 
     /**
-     * Registra una libreta insertando la libreta y mapeando sus relaciones en la tabla intermedia N:M
-     * usando objetos UsuarioLibreta.
-     * @param libreta    El objeto Libreta con los datos iniciales (nombre y saldo).
-     * @param idUsuario  El identificador numérico del usuario creador (Propietario).
-     * @param emailAmigo El correo opcional del usuario con quien se desea compartir (Invitado).
-     * @return true o false segun si se inserta todo con exito o no.
+     * Registra una libreta insertando la libreta y mapeando sus relaciones en la tabla intermedia N:M.
+     * Soporta la invitación de múltiples usuarios invitados simultáneamente.
+     * @param libreta El objeto Libreta con los datos iniciales.
+     * @param idUsuario El identificador numérico del usuario creador (Propietario).
+     * @param emailsCompartidos Cadena de caracteres con los correos de los invitados separados por comas.
+     * @return {@code true} si la inserción en bloque fue exitosa; {@code false} si falló.
      */
-    public boolean addLibretaCompartida(Libreta libreta, int idUsuario, String emailAmigo) {
+    public boolean addLibretaCompartida(Libreta libreta, int idUsuario, String emailsCompartidos) {
         try (Connection con = ConnectionDB.getInstance()) {
             con.setAutoCommit(false);
 
@@ -127,21 +127,28 @@ public class LibretaDAO implements GenericDAO<Libreta> {
                             psInter.setString(3, relacionCreador.getRol());
                             psInter.executeUpdate();
                         }
-                        if (emailAmigo != null && !emailAmigo.trim().isEmpty()) {
-                            String sqlBuscarAmigo = "SELECT id_usuario FROM USUARIO WHERE email = ?";
-                            try (PreparedStatement psAmigo = con.prepareStatement(sqlBuscarAmigo)) {
-                                psAmigo.setString(1, emailAmigo.trim());
-                                try (ResultSet rsAmigo = psAmigo.executeQuery()) {
-                                    if (rsAmigo.next()) {
-                                        int idAmigo = rsAmigo.getInt("id_usuario");
+                        if (emailsCompartidos != null && !emailsCompartidos.trim().isEmpty()) {
+                            String[] arrayEmails = emailsCompartidos.split(",");
 
-                                        UsuarioLibreta relacionInvitado = new UsuarioLibreta(idAmigo, libreta, "Invitado");
+                            for (String email : arrayEmails) {
+                                String emailSaneado = email.trim();
 
-                                        try (PreparedStatement psInterAmigo = con.prepareStatement(SQL_INSERT_INTERMEDIA)) {
-                                            psInterAmigo.setInt(1, relacionInvitado.getIdUsuario());
-                                            psInterAmigo.setInt(2, relacionInvitado.getLibreta().getIdLibreta());
-                                            psInterAmigo.setString(3, relacionInvitado.getRol());
-                                            psInterAmigo.executeUpdate();
+                                if (!emailSaneado.isEmpty()) {
+                                    String sqlBuscarAmigo = "SELECT id_usuario FROM USUARIO WHERE email = ?";
+                                    try (PreparedStatement psAmigo = con.prepareStatement(sqlBuscarAmigo)) {
+                                        psAmigo.setString(1, emailSaneado);
+                                        try (ResultSet rsAmigo = psAmigo.executeQuery()) {
+                                            if (rsAmigo.next()) {
+                                                int idAmigo = rsAmigo.getInt("id_usuario");
+                                                UsuarioLibreta relacionInvitado = new UsuarioLibreta(idAmigo, libreta, "Invitado");
+
+                                                try (PreparedStatement psInterAmigo = con.prepareStatement(SQL_INSERT_INTERMEDIA)) {
+                                                    psInterAmigo.setInt(1, relacionInvitado.getIdUsuario());
+                                                    psInterAmigo.setInt(2, relacionInvitado.getLibreta().getIdLibreta());
+                                                    psInterAmigo.setString(3, relacionInvitado.getRol());
+                                                    psInterAmigo.executeUpdate();
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -162,7 +169,7 @@ public class LibretaDAO implements GenericDAO<Libreta> {
      * @param idUsuario Identificador numérico del usuario consultado.
      * @return Lista con los objetos intermedios UsuarioLibreta cargados desde la base de datos.
      */
-    public static List<UsuarioLibreta> findAllByUsuarioLazy(int idUsuario) {
+    public List<UsuarioLibreta> findAllByUsuarioLazy(int idUsuario) {
         List<UsuarioLibreta> lista = new ArrayList<>();
         try (Connection con = ConnectionDB.getInstance();
              PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_USER)) {
@@ -193,7 +200,7 @@ public class LibretaDAO implements GenericDAO<Libreta> {
      * @param nuevoSaldo Monto monetario double que reemplazará al saldo anterior.
      * @return true si la operación modificó la fila o false si falló.
      */
-    public static boolean updateSaldo(int idLibreta, double nuevoSaldo) {
+    public boolean updateSaldo(int idLibreta, double nuevoSaldo) {
         try (Connection con = ConnectionDB.getInstance();
              PreparedStatement ps = con.prepareStatement(SQL_UPDATE_SALDO)) {
 
@@ -211,7 +218,7 @@ public class LibretaDAO implements GenericDAO<Libreta> {
      * @param nuevoNombre Cadena de caracteres con el nuevo título de la libreta.
      * @return true si la modificación impactó en la base de datos o false de lo contrario.
      */
-    public static boolean updateNombreLibreta(int idLibreta, String nuevoNombre) {
+    public boolean updateNombreLibreta(int idLibreta, String nuevoNombre) {
         try (Connection con = ConnectionDB.getInstance();
              PreparedStatement ps = con.prepareStatement(SQL_UPDATE_NOMBRE)) {
 
