@@ -11,6 +11,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de Acceso a Datos (DAO) encargada de las operaciones de autenticación y registro de usuarios en la base de datos.
+ * <p>
+ * Centraliza los métodos estáticos de persistencia para la gestión del control de accesos (Login)
+ * y la verificación de restricciones de integridad esenciales (unicidad del correo electrónico)
+ * durante el alta de nuevos perfiles en el sistema MySQL.
+ */
 public class UsuarioDAO {
     private final static String SQL_FIND_BY_EMAIL = "SELECT * FROM USUARIO WHERE email = ?";
     private final static String SQL_VALIDATE_LOGIN = "SELECT * FROM USUARIO WHERE email = ? AND password = ?";

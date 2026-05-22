@@ -9,13 +9,25 @@ import org.libretaahorros.libretaahorros.model.Gasto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase de Acceso a Datos (DAO) encargada de la persistencia de los movimientos financieros en la base de datos.
+ * <p>
+ * Implementa la interfaz {@code GenericDAO} parametrizada para la entidad {@code Movimiento}.
+ * Utiliza el patrón de diseño Singleton para centralizar las conexiones y mitigar la sobrecarga
+ * en el pool de conexiones de MySQL. Resuelve la persistencia de estructuras jerárquicas (herencia)
+ * mediante el mapeo selectivo de atributos especializados (procedencia y metodo de pago) en una única tabla.
+ */
 public class MovimientoDAO implements GenericDAO<Movimiento> {
 
     private static MovimientoDAO instance;
-
+    /**
+     * Constructor privado para restringir la instanciacion externa y garantizar el patrón Singleton.
+     */
     private MovimientoDAO() {}
-
+    /**
+     * Recupera la instancia única y centralizada del objeto de acceso a datos.
+     * * @return La instancia única de {@code MovimientoDAO}.
+     */
     public static MovimientoDAO getInstance() {
         if (instance == null) {
             instance = new MovimientoDAO();
@@ -29,6 +41,14 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
     private final static String SQL_DELETE_ALL_BY_LIBRETA = "DELETE FROM MOVIMIENTO WHERE id_libreta_fk = ?";
     private final static String SQL_UPDATE_MOVIMIENTO = "UPDATE MOVIMIENTO SET concepto = ?, cantidad = ?, fecha = ?, categoria = ?, tipo = ?, procedencia = ?, metodo_pago = ?, responsable = ? WHERE id_movimiento = ?";
 
+    /**
+     * Inserta un nuevo movimiento (Ingreso o Gasto) de forma persistente en el sistema.
+     * <p>
+     * Evalúa dinámicamente la especialización de la instancia mediante el operador {@code instanceof}
+     * para mapear de manera polimórfica las columnas específicas correspondientes en la base de datos.
+     * * @param m La instancia de {@code Movimiento} (u objeto hijo) a persistir.
+     * @return {@code true} si la inserción alteró con éxito las filas de la base de datos; {@code false} en caso contrario.
+     */
     @Override
     public boolean add(Movimiento m) {
         try (Connection con = ConnectionDB.getInstance();
@@ -59,7 +79,14 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
             return false;
         }
     }
-
+    /**
+     * Actualiza los valores de un registro de movimiento existente en la base de datos.
+     * <p>
+     * Sincroniza las modificaciones efectuadas en la interfaz discriminando el tipo de objeto
+     * de forma segura para setear valores nulos en los campos que no correspondan a su naturaleza.
+     * * @param m La instancia de {@code Movimiento} modificada que porta el identificador único.
+     * @return {@code true} si se localizó y actualizó el registro con éxito; {@code false} si falló la operación.
+     */
     @Override
     public boolean update(Movimiento m) {
         try (Connection con = ConnectionDB.getInstance();
@@ -88,7 +115,11 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
             return false;
         }
     }
-
+    /**
+     * Elimina físicamente un movimiento individual de la tabla mediante su clave primaria.
+     * * @param idMovimiento Identificador único de la transacción a eliminar.
+     * @return {@code true} si la operación eliminó el registro; {@code false} si hubo errores.
+     */
     @Override
     public boolean delete(int idMovimiento) {
         try (Connection con = ConnectionDB.getInstance();
@@ -100,7 +131,16 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
             return false;
         }
     }
-    public static List<Movimiento> findAllByLibretaEagle(int idLibreta) {
+    /**
+     * Recupera el historial completo de transacciones asociadas a una libreta de ahorros.
+     * <p>
+     * Consulta los registros ordenándolos de manera descendente por fecha. Transforma los campos
+     * planos de la base de datos reconstruyendo objetos especializados de tipo {@code Ingreso}
+     * o {@code Gasto} según la naturaleza de la fila, aplicando un control de seguridad en el parseo del Enum.
+     * * @param idLibreta Clave primaria de la libreta de ahorros de la cual extraer el historial.
+     * @return Una colección {@code List} de objetos de tipo {@code Movimiento}.
+     */
+    public List<Movimiento> findAllByLibretaEagle(int idLibreta) {
         List<Movimiento> lista = new ArrayList<>();
         try (Connection con = ConnectionDB.getInstance();
              PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_LIBRETA)) {
@@ -112,7 +152,14 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
                     String responsable = rs.getString("responsable");
 
                     String categoriaTexto = rs.getString("categoria");
-                    Categoria categoriaEnum = Categoria.valueOf(categoriaTexto.toUpperCase());
+                    Categoria categoriaEnum = Categoria.OTROS;
+                    if (categoriaTexto != null) {
+                        try {
+                            categoriaEnum = Categoria.valueOf(categoriaTexto.toUpperCase().trim());
+                        } catch (IllegalArgumentException e) {
+                            categoriaEnum = Categoria.OTROS;
+                        }
+                    }
                     if ("Ingreso".equalsIgnoreCase(tipo)) {
                         lista.add(new Ingreso(
                                 rs.getInt("id_movimiento"),
@@ -144,7 +191,12 @@ public class MovimientoDAO implements GenericDAO<Movimiento> {
         return lista;
     }
 
-    public static boolean deleteAllByLibreta(int idLibreta) {
+    /**
+     * Elimina masivamente y en cascada todos los movimientos pertenecientes a una libreta específica.
+     * * @param idLibreta Clave primaria de la libreta que se pretende vaciar.
+     * @return {@code true} si la purga se completó con éxito; {@code false} si falló.
+     */
+    public boolean deleteAllByLibreta(int idLibreta) {
         try (Connection con = ConnectionDB.getInstance();
              PreparedStatement ps = con.prepareStatement(SQL_DELETE_ALL_BY_LIBRETA)) {
             ps.setInt(1, idLibreta);

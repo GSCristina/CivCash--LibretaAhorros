@@ -7,14 +7,14 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.TablaController">
     <top>
         <MenuBar style="-fx-background-color: #b0e0e2;" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleCerrarSesion" text="Cerrar Sesión" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleSalirAlSelector" text="Salir" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionCerrarSesion" text="Cerrar Sesión" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionSalirAlSelector" text="Salir" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edición">
@@ -22,7 +22,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleEditarLibretaActual" text="Editar Nombre Libreta" />
                         <MenuItem mnemonicParsing="false" onAction="#handleEliminarLibretaActual" text="Eliminar Libreta" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleBorrarTodoMovimientos" text="Borrar Todo" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionBorrarTodoMovimientos" text="Borrar Todo" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ayuda">

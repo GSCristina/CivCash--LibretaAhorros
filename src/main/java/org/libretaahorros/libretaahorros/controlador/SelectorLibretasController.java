@@ -14,39 +14,48 @@ import org.libretaahorros.libretaahorros.model.UsuarioLibreta;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Esta clase gestiona el panel intermedio post-autenticación, encargado de renderizar
+ * de forma dinámica los accesos a las libretas asociadas al usuario en sesión mediante
+ * un contenedor de disposición fluida (FlowPane). Implementa una estrategia de carga
+ * atenuada o diferida (Lazy) para optimizar las consultas iniciales a la base de datos,
+ * y mapea las restricciones de seguridad inyectando el rol correspondiente en el contexto de sesión.
+ */
 public class SelectorLibretasController {
 
     @FXML private Label lblUsuario;
     @FXML private FlowPane fpLibretas;
 
+    /**
+     * Metodo que muestra una frase de bienvenida al usuario que inicia sesion
+     */
     @FXML
     public void initialize() {
         if (SesionController.getUsuario() != null) {
-            lblUsuario.setText("Bienvenido, " + SesionController.getUsuario().getEmail());
+            lblUsuario.setText("¡Es genial volver a verte " + SesionController.getUsuario().getEmail()+ " !");
         }
         cargarLibretas();
     }
 
     /**
-     * Metodo encargado de cargar las libretas de usuarios, cambia el formato para aquellas compartidas entre otros
-     * y aplica diferentes roles, usa lmbda para gestionar la transicion en el controlador de sesion.
+     * Metodo encargado de cargar las libretas de usuarios usando el metodo lazy del DAO para buscar todas
+     * las libretas a las que esta asociado el usuario logueado y aplica diferentes roles, usa lambda para
+     * gestionar la transicion en el controlador de sesion.
      */
     private void cargarLibretas() {
         fpLibretas.getChildren().clear();
 
         int idUser = SesionController.getUsuario().getIdUsuario();
-        List<UsuarioLibreta> listaAsociaciones = LibretaDAO.findAllByUsuarioLazy(idUser);
+        List<UsuarioLibreta> listaAsociaciones = LibretaDAO.getInstance().findAllByUsuarioLazy(idUser);
 
         for (UsuarioLibreta asociacion : listaAsociaciones) {
-            Libreta lib = asociacion.getLibreta();
-            Button btnLibreta = new Button(lib.getNombre() + "\nSaldo: " + lib.getSaldoActual() + "€");
+            Libreta libreta = asociacion.getLibreta();
+            Button btnLibreta = new Button(libreta.getNombre() + "\nSaldo: " + libreta.getSaldoActual() + "€");
             btnLibreta.setPrefSize(120, 80);
 
-            if (asociacion.getRol().equals("Invitado")) {
-                btnLibreta.setStyle("-fx-border-color: #3caea3; -fx-border-width: 2px;");
-            }
             btnLibreta.setOnAction(event -> {
-                SesionController.setLibreta(lib);
+                SesionController.setLibreta(libreta);
+                SesionController.setRolActual(asociacion.getRol());
                 cargarVentanaPrincipal();
             });
             fpLibretas.getChildren().add(btnLibreta);
@@ -54,15 +63,17 @@ public class SelectorLibretasController {
     }
 
     /**
-     * Este método carga la ventana principal el main donde se encuntran las tablas
+     * Este metodo se encarga de hacer la transicion entre pantallas cerrando la vista del selector de libretas y cargando
+     * el panel principal, es decir, la tabla dentro de esta. Utilizamos recursos de java para evitar tener que poner una ruta
+     * absoluta.
       */
     private void cargarVentanaPrincipal() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/main_view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/Tabla_view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) fpLibretas.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Libreta de Ahorros - " + SesionController.getLibreta().getNombre());
+            stage.setTitle("Libreta de Ahorros: " + SesionController.getLibreta().getNombre());
             stage.setResizable(true);
             stage.show();
 
@@ -71,8 +82,14 @@ public class SelectorLibretasController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo que se encarga de crear una libreta totalmente nueva y actualizando automaticamente la venta anterior
+     * para mostrar la nueva escena, utiliza una ventana modal bloqueando la anterior hasta que el usuario decida que termine
+     * de crear la nueva libreta o la cancele.
+     */
     @FXML
-    public void handleNuevaLibreta() {
+    public void accionNuevaLibreta() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/nueva_libreta_view.fxml"));
 
@@ -90,8 +107,12 @@ public class SelectorLibretasController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo con el que el usuario cierra la sesion devolviendolo a la ventana del login.
+     */
     @FXML
-    public void handleCerrarSesion() {
+    public void accionCerrarSesion() {
         System.out.println("Cerrando sesión...");
         SesionController.cerrarSesion();
 
