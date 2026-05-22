@@ -1,6 +1,6 @@
-# 🏦 SaveLog - Libreta de Ahorros Standalone
+# 🏦 CivCash -Libreta de Ahorros Standalone
 
-**SaveLog** es una aplicación de escritorio desarrollada en Java para la gestión integral de finanzas personales. Permite a los usuarios realizar un seguimiento detallado de sus ingresos y gastos, organizar sus ahorros en diferentes libretas y categorizar cada movimiento para un análisis financiero eficiente.
+**CivCash** es una aplicación de escritorio desarrollada en Java para la gestión integral de finanzas personales. Permite a los usuarios realizar un seguimiento detallado de sus ingresos y gastos, organizar sus ahorros en diferentes libretas y categorizar cada movimiento para un análisis financiero eficiente.
 
 ## 👤 Autor
 * **Nombre:** Cristina Cívico Ariza
