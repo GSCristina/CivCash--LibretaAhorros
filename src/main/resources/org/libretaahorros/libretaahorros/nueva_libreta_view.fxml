@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: #e8eeee;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.NuevaLibretaController">
+    <children>
+        <Label text="Crear Nueva Libreta">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+
+        <VBox spacing="5.0">
+            <children>
+                <Label text="Nombre de la libreta:" />
+                <TextField fx:id="txtNombre" promptText="Ej: Ahorros Coche, Gastos Casa..." />
+                <Label text="Compartir con (Email de amigo) - Opcional:" />
+                <TextField fx:id="txtEmailAmigo" promptText="Ej: amigo@correo.com" />
+            </children>
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="20.0">
+            <children>
+                <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#clickGuardar" style="-fx-background-color: #2ecc71;" text="Guardar" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <effect>
+                        <DropShadow height="4.62" radius="1.81" width="4.62">
+                            <color>
+                                <Color red="0.7052631378173828" green="0.7052631378173828" blue="0.7052631378173828" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Button>
+                <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#clickCancelar" style="-fx-background-color: #e74c3c;" text="Cancelar" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <effect>
+                        <DropShadow height="4.62" radius="1.81" width="4.62">
+                            <color>
+                                <Color red="0.6842105388641357" green="0.6842105388641357" blue="0.6842105388641357" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

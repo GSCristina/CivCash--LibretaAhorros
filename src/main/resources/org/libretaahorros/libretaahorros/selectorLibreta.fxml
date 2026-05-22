@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #e8eeee;" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.SelectorLibretasController">
+    <children>
+
+        <Label styleClass="titulo-ventana" text="Mis Libretas">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+
+        <Label fx:id="lblUsuario" styleClass="texto-usuario" text="Bienvenido, usuario@email.com" />
+
+        <ScrollPane fitToWidth="true" prefHeight="250.0" style="-fx-background-color: transparent;">
+            <content>
+                <FlowPane fx:id="fpLibretas" hgap="15.0" vgap="15.0">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </FlowPane>
+            </content>
+        </ScrollPane>
+
+        <HBox alignment="CENTER" spacing="20.0">
+            <children>
+                <Button onAction="#accionNuevaLibreta" styleClass="boton-principal" text="+ Nueva Libreta">
+                    <HBox.margin>
+                        <Insets bottom="10.0" />
+                    </HBox.margin>
+                    <effect>
+                        <DropShadow height="4.62" radius="1.81" width="4.62">
+                            <color>
+                                <Color red="0.621052622795105" green="0.621052622795105" blue="0.621052622795105" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Button>
+
+                <Button onAction="#accionCerrarSesion" styleClass="boton-cancelar" text="Cerrar Sesión">
+                    <HBox.margin>
+                        <Insets bottom="10.0" />
+                    </HBox.margin>
+                    <effect>
+                        <DropShadow height="4.62" radius="1.81" width="4.62">
+                            <color>
+                                <Color red="0.5684210658073425" green="0.5684210658073425" blue="0.5684210658073425" />
+                            </color>
+                        </DropShadow>
+                    </effect></Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>

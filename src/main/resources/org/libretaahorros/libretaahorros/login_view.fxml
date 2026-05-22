@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Tema.css" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.libretaahorros.libretaahorros.controlador.LoginController">  <columnConstraints>
+    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="21.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="79.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="147.39999237060547" minHeight="10.0" prefHeight="118.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="122.4" minHeight="10.0" prefHeight="72.40000000000003" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="86.39999999999998" minHeight="10.0" prefHeight="54.39999999999998" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="69.39999999999998" minHeight="10.0" prefHeight="69.39999999999998" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Email" GridPane.rowIndex="1">
+         <font>
+            <Font name="Segoe UI" size="18.0" />
+         </font></Label>
+      <Label text="Contraseña" GridPane.rowIndex="2">
+         <font>
+            <Font name="Segoe UI" size="18.0" />
+         </font></Label>
+      <TextField fx:id="txtEmail" prefWidth="305.0" promptText="ejemplo@email.com" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+      <PasswordField fx:id="txtPassword" promptText="Tu contraseña" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Button fx:id="btnEntrar" mnemonicParsing="false" onAction="#onLoginClick" style="-fx-background-color: #86D1D1;" text="Entrar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="6.96" radius="3.5650000000000004" width="9.3">
+                     <color>
+                        <Color red="0.49473685026168823" green="0.4910721182823181" blue="0.4910721182823181" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#onRegisterClick" text="Registrarse">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="4.62" radius="2.395" width="6.96">
+                     <color>
+                        <Color red="0.6736842393875122" green="0.6736842393875122" blue="0.6736842393875122" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+         </children>
+      </HBox>
+      <ImageView fitHeight="171.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+         <image>
+            <Image url="@logo-removebg-preview.png" />
+         </image>
+         <effect>
+            <Blend />
+         </effect>
+      </ImageView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</GridPane>
