@@ -29,7 +29,7 @@
 ## ⚙️ Instrucciones de Instalación y Configuración
 
 ### 1. Base de Datos
-Importa el script SQL que se encuentra en la carpeta `/docs/database_schema.sql` en tu servidor MySQL para crear la estructura de tablas necesaria.
+Importa el script SQL que se encuentra en la carpeta `src/scripts/Libreta-ahorros.sql` en tu servidor MySQL para crear la estructura de tablas necesaria.
 
 ### 2. Configuración de la Conexión
 Por motivos de seguridad, los archivos que contienen credenciales no están incluidos en el repositorio. Sigue estos pasos:
