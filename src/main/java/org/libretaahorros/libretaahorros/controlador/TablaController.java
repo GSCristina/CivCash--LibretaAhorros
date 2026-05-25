@@ -188,7 +188,7 @@ public class TablaController {
      * Gestiona la eliminación permanente y en cascada de la libreta activa en la sesión.
      * Despliega un cuadro de diálogo modal de confirmación (CONFIRMATION) para advertir
      * al usuario sobre la pérdida irreversible de los datos. Si se confirma la acción,
-     * invoca al mEtodo de borrado del DAO pasándole el identificador único y, tras un
+     * invoca al metodo de borrado del DAO pasándole el identificador único y, tras un
      * borrado exitoso, redirige de forma automática al usuario hacia el selector de libretas.
      */
     @FXML
