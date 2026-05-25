@@ -19,15 +19,15 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edición">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleEditarLibretaActual" text="Editar Nombre Libreta" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleEliminarLibretaActual" text="Eliminar Libreta" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionEditarNombreLibreta" text="Editar Nombre Libreta" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionEliminarLibretaActual" text="Eliminar Libreta" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#accionBorrarTodoMovimientos" text="Borrar Todo" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ayuda">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleAcercaDe" text="Acerca de" />
+                        <MenuItem mnemonicParsing="false" onAction="#accionAcercaDe" text="Acerca de" />
                     </items>
                 </Menu>
             </menus>
@@ -51,7 +51,7 @@
     <right>
         <VBox spacing="15.0" style="-fx-background-color: #b0e0e2;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo">
+                <Button fx:id="btnNuevo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accionNuevoMovimiento" style="-fx-background-color: #A6E094;" text="Nuevo">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -62,7 +62,7 @@
                      </color>
                   </DropShadow>
                </effect></Button>
-                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditarMovimiento" text="Editar">
+                <Button fx:id="btnEditar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accionEditarMovimiento" text="Editar">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -73,7 +73,7 @@
                      </color>
                   </DropShadow>
                </effect></Button>
-                <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEliminarMovimiento" style="-fx-background-color: #f24a50;" text="Eliminar">
+                <Button fx:id="btnEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accionEliminarMovimiento" style="-fx-background-color: #f24a50;" text="Eliminar">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

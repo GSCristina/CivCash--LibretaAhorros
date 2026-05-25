@@ -72,7 +72,7 @@ public class LoginController {
      * una notificacion al usuario y si falla mostrara una alerta de error
      */
     @FXML
-    public void onRegisterClick() {
+    public void ClickRegistrar() {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {

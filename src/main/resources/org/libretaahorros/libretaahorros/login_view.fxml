@@ -42,7 +42,7 @@
                      </color>
                   </DropShadow>
                </effect></Button>
-            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#onRegisterClick" text="Registrarse">
+            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#ClickRegistrar" text="Registrarse">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

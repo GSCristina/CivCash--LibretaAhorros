@@ -147,7 +147,7 @@ public class TablaController {
      * automáticamente al usuario de vuelta al selector de libretas.
      */
     @FXML
-    private void handleEditarLibretaActual() {
+    private void accionEditarNombreLibreta() {
         Libreta libretaActual = SesionController.getLibreta();
 
         if (libretaActual == null) {
@@ -192,7 +192,7 @@ public class TablaController {
      * borrado exitoso, redirige de forma automática al usuario hacia el selector de libretas.
      */
     @FXML
-    private void handleEliminarLibretaActual() {
+    private void accionEliminarLibretaActual() {
         Libreta libretaActual = SesionController.getLibreta();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar eliminación");
@@ -219,7 +219,7 @@ public class TablaController {
      * actualizar la tabla y el saldo reflejado en la interfaz.
      */
     @FXML
-    private void handleNuevoMovimiento() {
+    private void accionNuevoMovimiento() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/libretaahorros/libretaahorros/movimiento_view.fxml"));
             Scene scene = new Scene(loader.load());
@@ -245,7 +245,7 @@ public class TablaController {
      * desencadenando finalmente el refresco de los datos en la interfaz.
      */
     @FXML
-    private void handleEditarMovimiento() {
+    private void accionEditarMovimiento() {
         Movimiento seleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
         if (seleccionado == null) {
             Util.mostrarAlerta(Alert.AlertType.WARNING, "Selección requerida", "Selecciona un movimiento de la tabla para editar.");
@@ -282,7 +282,7 @@ public class TablaController {
      * mediante su identificador único, procediendo finalmente a refrescar la interfaz.
      */
     @FXML
-    private void handleEliminarMovimiento() {
+    private void accionEliminarMovimiento() {
         Movimiento seleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
         if (seleccionado == null) {
             Util.mostrarAlerta(Alert.AlertType.WARNING, "Selección requerida", "Selecciona un movimiento para eliminar.");
@@ -315,7 +315,7 @@ public class TablaController {
      * funcional de los módulos del sistema.
      */
     @FXML
-    private void handleAcercaDe() {
+    private void accionAcercaDe() {
         String mensaje = "Libreta de Ahorros Familiar v1.0\n\n"
                 + "Desarrollado por: Cristina Cívico Ariza\n"
                 + "Curso: 1º Desarrollo de Aplicaciones Multiplataforma (DAM)\n"
